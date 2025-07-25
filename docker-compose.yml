@@ -1,0 +1,23 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine  # Empfehlung: Eine spezifische Version verwenden
+    container_name: my_postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: gggigiu
+      POSTGRES_DB: userbookdb
+    ports:
+      # Mappt den Port 5432 des Containers auf den Port 5432 deines lokalen Rechners
+      - "5432:5432"
+    volumes:
+      # Persistiert die Datenbankdaten in einem benannten Volume
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
